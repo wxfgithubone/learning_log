@@ -1,0 +1,47 @@
+{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h1>主题</h1>
+{% endblock header %}
+
+{% block content %}
+
+ <ul>
+     {% for topic in topics %}
+       <li>
+           <h3>
+               <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+           </h3>
+       </li>
+     {% empty %}
+       <li>还没有添加主题</li>
+     {% endfor %}
+ </ul>
+ <h3><a href="{% url 'learning_logs:new_topic' %}" class="nav navbar-nav">添加一个主题</a></h3>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
