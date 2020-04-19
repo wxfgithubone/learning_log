@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1=+hryq#$@u7k)917+*#xkhm8#b+4@%vi7b$r-9_&lbeh&(tz)'
 
 # 安全警告:不要在生产环境中打开调试!
-DEBUG = True
-
-ALLOWED_HOSTS = ['localhost']
+# DEBUG = True
+#
+# ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'users',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -146,9 +146,9 @@ if cwd == '/app' or cwd[:4] == '/tmp':
 SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}
 
 # 只允许heroku托管这个项目
-# ALLOWED_HOSTS = ['wangxaiofei.herokuapp.com']
-#
-# DEBUG = True
+ALLOWED_HOSTS = ['wangxaiofei.herokuapp.com']
+
+DEBUG = True
 
 # 静态资产配置
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
