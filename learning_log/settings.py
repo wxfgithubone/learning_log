@@ -22,10 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '1=+hryq#$@u7k)917+*#xkhm8#b+4@%vi7b$r-9_&lbeh&(tz)'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# 安全警告:不要在生产环境中打开调试!
+# DEBUG = True
+#
+# ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'users',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -146,7 +146,7 @@ if cwd == '/app' or cwd[:4] == '/tmp':
 SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}
 
 # 只允许heroku托管这个项目
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['wangxaiofei.herokuapp.com']
 
 # DEBUG = False
 
