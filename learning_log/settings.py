@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'users',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -146,7 +146,7 @@ if cwd == '/app' or cwd[:4] == '/tmp':
 SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}
 
 # 只允许heroku托管这个项目
-ALLOWED_HOSTS = ['wangxaiofei.herokuapp.com']
+ALLOWED_HOSTS = ['localhost']
 
 # DEBUG = False
 
