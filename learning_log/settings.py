@@ -148,7 +148,7 @@ SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}
 # 只允许heroku托管这个项目
 ALLOWED_HOSTS = ['wangxaiofei.herokuapp.com']
 
-# DEBUG = False
+DEBUG = True
 
 # 静态资产配置
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
