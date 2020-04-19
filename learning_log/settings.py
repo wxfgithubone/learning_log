@@ -146,7 +146,7 @@ if cwd == '/app' or cwd[:4] == '/tmp':
 SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}
 
 # 只允许heroku托管这个项目
-ALLOWED_HOSTS = ['wangxaiofei.herokuapp.com']
+ALLOWED_HOSTS = ['localhost']
 
 DEBUG = False
 
