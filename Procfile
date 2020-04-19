@@ -1,1 +1,1 @@
-web: gunicorn learning_log.wagi __log-file -
+web: gunicorn learning_log.wsgi __log-file -
