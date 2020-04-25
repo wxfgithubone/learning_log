@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ff5c09f-6759-4e3e-919d-d2b4f721fce7" name="Default Changelist" comment="" />
+    <list default="true" id="2ff5c09f-6759-4e3e-919d-d2b4f721fce7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/learning_logs/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/learning_logs/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_logs/froms.py" beforeDir="false" afterPath="$PROJECT_DIR$/learning_logs/froms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_logs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/learning_logs/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/learning_logs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/learning_logs/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

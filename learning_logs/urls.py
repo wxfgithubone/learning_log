@@ -24,13 +24,6 @@ urlpatterns = [
     # 用于删除条目
     url(r'^del_entry/(?P<entry_id>\d+)/$', views.del_entry, name='del_entry')
 
-    # # 显示所有的资产表
-    # url(r'^assets/$', views.assets, name='assets'),
-    # # 新增资产表
-    # url(r'^new_asset/(?P<asset_id>\d+)/$', views.new_asset, name='new_asset'),
-    # # 编辑资产表
-    # url(r'^edit_asset/(?P<asset_id>\d+)/$', views.edit_asset, name='edit_asset'),
-
 ]
 
 
