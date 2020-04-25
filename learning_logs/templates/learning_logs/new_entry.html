@@ -2,12 +2,15 @@
 
 {% block content %}
 
- <p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
- <p>新建一个条目</p>
+ <p>
+     <a class="btn btn-primary">当前主题：</a>
+     <h4>{{ topic }}</h4>
+ </p>
+ <h3>添加日记</h3>
  <form action="{% url 'learning_logs:new_entry' topic.id %}" method="post">
      {% csrf_token %}
      {{ form.as_p }}
-     <button name="submit">添加条目</button>
+     <button name="submit">添加日记</button>
  </form>
 
 {% endblock content %}

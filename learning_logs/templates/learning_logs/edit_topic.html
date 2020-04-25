@@ -2,11 +2,11 @@
 
 {% block content %}
  <p>
-     <a class="btn btn-primary">所属主题：</a>
+     <a class="btn btn-primary">当前名称：</a>
      <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
-     <h3> 编辑日记</h3>
+     <h3>修改名称</h3>
  </p>
- <form action="{% url 'learning_logs:edit_entry' entry.id %}" method="post">
+ <form action="{% url 'learning_logs:edit_topic' topic.id %}" method="post">
      {% csrf_token %}
      {{ form.as_p }}
      <h4>
@@ -15,43 +15,3 @@
  </form>
 
 {% endblock content %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

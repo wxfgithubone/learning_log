@@ -7,18 +7,23 @@
 
 {% block content %}
 
- <ul>
+<p>
+   <a href="{% url 'learning_logs:new_topic' %}" class="btn btn-primary">添加一个主题</a>
+</p>
+
      {% for topic in topics %}
-       <li>
-           <h3>
-               <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
-           </h3>
-       </li>
+     <div class="panel panel-default">
+         <div class="panel-heading">
+                 <h3>
+                     <a href="{% url 'learning_logs:topic' topic.id %}" class="panel-body">{{ topic }}</a>
+                 </h3>
+         </div>
+         <a href="{% url 'learning_logs:edit_topic' topic.id %}" class="btn btn-primary">修改名称</a>
+     </div><!-- panel -->
      {% empty %}
        <li>还没有添加主题</li>
      {% endfor %}
- </ul>
- <h3><a href="{% url 'learning_logs:new_topic' %}" class="nav navbar-nav">添加一个主题</a></h3>
+
 
 {% endblock content %}
 
