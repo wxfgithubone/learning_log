@@ -44,17 +44,7 @@ INSTALLED_APPS = [
     # 我的应用程序
     'learning_logs',
     'users',
-
-    # 富文本编辑器
-    'ckeditor',
-
-    # 富文本编辑器上传图片模块
-    'ckeditor_uploader',
 ]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-CKEDITOR_UPLOAD_PATH = ''  # 使用fdfs分布系统
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
