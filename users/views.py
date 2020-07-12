@@ -10,7 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 def logout_view(request):
     """注销用户"""
     logout(request)
-    return HttpResponseRedirect(reverse('learning_logs:index'))
+    return HttpResponseRedirect(reverse('users:login'))
 
 
 def register(request):
