@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
-from .models import Topic, Entry, Img
-from .froms import TopicForm, EntryForm, AddForm
+from .models import Topic, Entry, Img2, StudentMessage, StudentCourse
+from .froms import TopicForm, EntryForm, AddForm, StudentMessageFrom, StudentCourseForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 # 在这里创建视图
@@ -11,6 +11,11 @@ from django.contrib import messages
 def index(request):
     """学习笔记的主页"""
     return render(request, 'learning_logs/index.html')
+
+
+def state(request):
+    """学习笔记说明"""
+    return render(request, "learning_logs/state.html")
 
 
 @login_required
@@ -92,29 +97,6 @@ def new_entry(request, topic_id):
 
 
 @login_required
-def add_img(request):
-    # 判断是否为 post 方法提交
-    if request.method == "POST":
-        af = AddForm(request.POST, request.FILES)
-        # 判断表单值是否和法
-        if af.is_valid():
-            name = af.cleaned_data['name']
-            headimg = af.cleaned_data['headimg']
-            user = Img(name=name, headimg=headimg)
-            messages.error(request, '添加图片成功')
-            user.save()
-            return render(request, 'learning_logs/look_img.html', context={"user": user})
-    else:
-        af = AddForm()
-        return render(request, 'learning_logs/add_img.html', context={"af": af})
-
-
-@login_required
-def look_img(request):
-    return render(request, 'learning_logs/look_img.html')
-
-
-@login_required
 def edit_entry(request, entry_id):
     """编辑既有条目"""
     entry = Entry.objects.get(id=entry_id)
@@ -144,6 +126,87 @@ def del_entry(request, entry_id):
     return render(request, 'learning_logs/index.html')
 
 
+@login_required
+def add_img(request):
+    """添加图片"""
+    # 判断是否为 post 方法提交
+    if request.method == "POST":
+        af = AddForm(request.POST, request.FILES)
+        # 判断表单值是否和法
+        if af.is_valid():
+            name = af.cleaned_data['name']
+            headimg = af.cleaned_data['headimg']
+            user = Img2(name=name, headimg=headimg)
+            user.owner = request.user
+            messages.error(request, '添加图片成功')
+            user.save()
+            return render(request, 'learning_logs/look_img.html', context={"user": user})
+    else:
+        af = AddForm()
+        return render(request, 'learning_logs/add_img.html', context={"af": af})
 
 
+@login_required
+def look_img(request):
+    """查看当前用户的图片"""
+    imgs = Img2.objects.filter(owner=request.user).order_by('-date_added')
+    context = {"imgs": imgs}
+    return render(request, 'learning_logs/imgs.html', context)
+
+
+@login_required
+def del_img(request, id):
+    """删除图片"""
+    img = Img2.objects.get(id=id)
+    img.delete()
+    return render(request, 'learning_logs/index.html')
+
+
+def students(request):
+    """显示所有学生"""
+    students = StudentMessage.objects.filter(owner=request.user).order_by('-date_added')
+    context = {"students": students}
+    return render(request, 'learning_logs/students.html', context)
+
+
+def student(request, student_id):
+    """单个学生的成绩页"""
+    student = get_object_or_404(StudentMessage, id=student_id)
+    if student.owner != request.user:
+        raise Http404
+    st = student.studentcourse_set.order_by('-date_added')
+    context = {'student': student, 'st': st}
+    return render(request, 'learning_logs/student.html', context)
+
+
+def add_student(request):
+    """添加学生"""
+    if request.method != 'POST':
+        form = StudentMessageFrom()
+    else:
+        form = StudentMessageFrom(request.POST)
+        if form.is_valid():
+            new_student = form.save(commit=False)
+            new_student.owner = request.user
+            new_student.save()
+            return HttpResponseRedirect(reverse('learning_logs:students'))
+
+    context = {'form': form}
+    return render(request, 'learning_logs/add_student.html', context)
+
+
+def add_course(request, student_id):
+    """指定学生的课程"""
+    student = StudentMessage.objects.get(id=student_id)
+    if request.method != 'POST':
+        form = StudentCourseForm()
+    else:
+        form = StudentCourseForm(data=request.POST)
+        if form.is_valid():
+            new_course = form.save(commit=False)
+            new_course.student = student
+            new_course.save()
+            return HttpResponseRedirect(reverse('learning_logs:student', args=[student_id]))
+    context = {'student': student, 'form': form}
+    return render(request, 'learning_logs/add_course.html', context)
 

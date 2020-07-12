@@ -1,0 +1,32 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+<a href="{% url 'learning_logs:add_course' student.id %}">添加成绩</a>
+  {% for i in st %}
+   <div class="panel panel-default">
+       <div class="panel-heading">
+           <ul>
+<!--               <li>学生ID：{{ i.student_id }}</li>-->
+               <li>科目：{{ i.course}}</li>
+               <li>分数：{{ i.score }}</li>
+           </ul>
+           <dir>
+               {% if user.is_authenticated %}
+                <h4>评分老师：{{ user.username }}</h4>
+               {% endif %}
+           </dir>
+       </div>
+       <div class="panel-body">
+       </div>
+   </div><!-- panel -->
+   {% empty %}
+    <h2><li>该学生暂无成绩</li></h2>
+    <a href="{% url 'learning_logs:add_course' student.id %}">添加成绩</a>
+   {% endfor %}
+
+{% endblock content %}
+
+
+

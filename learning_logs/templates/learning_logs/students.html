@@ -1,0 +1,31 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<h3><a href="{% url 'learning_logs:add_student' %}">添加学生</a></h3>
+     {% for student in students %}
+     <div class="panel panel-default">
+         <div class="panel-heading">
+                 <h4>
+                     <a href="{% url 'learning_logs:student' student.id %}" class="panel-body">{{ student }}</a>
+                     <ul>
+                         <li>学生ID：{{ student.id }}</li>
+                     </ul>
+                 </h4>
+         </div>
+
+     </div><!-- panel -->
+     {% empty %}
+       <li>还没有添加学生</li>
+     {% endfor %}
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+

@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-
 # 在这里创建模型
 
 
@@ -32,24 +31,60 @@ class Entry(models.Model):
             return self.text[:50] + '....'
 
 
-# class Asset(models.Model):
-#     """
-#     资产表
-#     """
-#     brand = models.CharField(verbose_name='品牌', max_length=32)
-#     model = models.CharField(verbose_name='型号', max_length=32)
-#     number = models.CharField(verbose_name='编号', max_length=32)
-#     leader_time = models.DateTimeField(verbose_name='领用时间', max_length=32)
-#     leader = models.CharField(verbose_name='领用人', max_length=32)
-#     return_time = models.DateTimeField(verbose_name='归还时间', max_length=32, null=True)
-#     other = models.CharField(verbose_name='备注', max_length=128, null=True)
+# class Img(models.Model):
+#     name = models.CharField(max_length=50)
+#     # upload_to 指定上传文件位置
+#     # 这里指定存放在 img/ 目录下
+#     headimg = models.FileField(upload_to="img/")
 #
+#     # 返回名称
 #     def __str__(self):
-#
-#         return self.leader
-#
-#     class Meta:
-#         verbose_name = "资产表"
-#         verbose_name_plural = verbose_name
+#         return self.name
+
+
+class Img2(models.Model):
+    name = models.CharField(max_length=50)
+    headimg = models.FileField(upload_to="img2/")
+    date_added = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class StudentMessage(models.Model):
+    """学生基础信息"""
+    gender = (
+        ('男', '男'), ('女', '女'), ('性别不详', '性别不详')
+    )
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+    st_name = models.CharField(max_length=25, verbose_name="学生姓名")
+    age = models.CharField(max_length=10, verbose_name="学生年龄")
+    sex = models.CharField(max_length=10, choices=gender, default='性别不详', verbose_name="学生性别")
+    phone = models.CharField(max_length=11, unique=True,
+                             error_messages={'unique': "手机号已存在，请更换"}, verbose_name="手机号")
+    home = models.CharField(max_length=128, verbose_name="学生地址")
+
+    def __str__(self):
+        """返回学生姓名"""
+        return self.st_name
+
+
+class StudentCourse(models.Model):
+    """学生分数表"""
+    cus = (
+        ('语文', '语文'), ('数学', '数学'), ('英语', '英语'), ('计算机', '计算机'),
+        ('体育', '体育'), ('音乐', '音乐'), ('美术', '美术'), ('古语', '古语'),
+    )
+    student = models.ForeignKey(StudentMessage, on_delete=models.CASCADE)
+    course = models.CharField(max_length=10, choices=cus, default='语文', verbose_name='课程')
+    score = models.IntegerField(max_length=10, verbose_name="分数")
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "科目—{0}：{1}分".format(self.course, self.score)
+
+
 
 
