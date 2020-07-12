@@ -1,18 +1,47 @@
 {% extends "learning_logs/base.html" %}
 
 {% block header %}
+<html>
+<head>
+<link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript">$(document).ready(function(){
+        });
+    </script>
+</head>
   <div class="jumbotron">
       <h1>跟踪你的学习</h1>
   </div>
 {% endblock header %}
 
 {% block content %}
-  <h2>
-       制作自己的学习日志，并列出你正在学习的主题
-  </h2>
-  <h2>
-      每当你对一个话题有了新的认识，就做一个总结!
-  </h2>
+<h4>
+    <tr >
+        <a href="http://www.baidu.com/" target="_blank" >百度</a>***
+        <a href="https://email.163.com/" target="_blank">163邮箱</a>***
+        <a href="https://mail.qq.com/" target="_blank">QQ邮箱</a>***
+        <a href="http://localhost:8000/add_img/" target="_blank">添加图片</a>***
+        <a href="http://localhost:8000/admin/" >Django站点</a>
+    </tr>
+    </h4>
+<body>
+  </div>
+  <div class="row-fluid">
+    <div class="span10 well">
+    <h3>iframe上传文件</h3>
+       <iframe id="img" name="nf" src="http://localhost:8000/add_img/" width="500"
+                 height="200">
+       </iframe>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span10 well">
+    <h3>iframe百度搜索</h3>
+       <iframe id="if" name="nf" src="http://www.baidu.com" width="1100"
+                 height="400">
+       </iframe>
+    </div>
+</body>
+</html>
 {% endblock content %}
 
 

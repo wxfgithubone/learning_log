@@ -1,0 +1,177 @@
+手写格式：$x('//*[@href="/topic/20/"]') 
+
+Git命令：
+查看用户名和邮箱地址：
+git config user.name
+git config user.email
+
+修改用户名和邮箱地址：
+账号：
+1845719332@qq.com
+密码：
+wxf990824
+
+git config --global user.name? "xxxx"
+git config --global user.email? "xxxx"
+
+克隆项目：
+git clone 项目克隆地址
+
+heroku项目地址：
+https://floating-temple-33902.herokuapp.com/ | https://git.heroku.com/floating-temple-33902.git
+
+heroku：
+账号：
+xfwang0824@outlook.com
+密码：
+wxf990824.
+
+MySQL：
+IP：127.0.0.1
+用户：root
+密码：123456
+端口：3306
+
+windows redis的启动，配置文件在redis安装目录下
+redis-server redis.windows.conf
+
+启动celery, 进入项目虚拟环境，在项目根目录下执行
+celery -A celery_tasks.tasks worker --loglevel=info -P eventlet
+
+Xshell:
+/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart
+/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart
+/usr/bin/fdfs_test /etc/fdfs/client.conf upload 文件路径
+./nginx
+
+Django命令：
+建立虚拟环境 ：
+python -m venv ll_env(文件名自定义)
+
+激活虚拟环境：
+（文件名自定义）ll_env\Scripts\activate
+
+查看项目（本地）：
+python manage.py runserver
+
+国内镜像快速安装:
+pip install django==版本 -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install 包名称 -i https://pypi.tuna.tsinghua.edu.cn/simple  清华镜像
+
+python版本       对应       django版本
+3.5，3.6，3.7               2.1，2.2
+3.4，3.5，3.6               2.0
+2.7，3.4，3.5，3.6          1.11
+2.7，3.4，3.5               1.9，1.10
+2.7，3.2，3.3，3.4，3.5     1.8
+
+建立项目：
+django-admin startproject 文件名 .
+
+创建数据库：（django自带，可在settings.py更换）
+python manage.py migrate
+
+建立应用程序：
+python manage.py startapp 文件名
+
+关闭虚拟环境：
+deactivate
+
+创建超级用户:
+python manage.py createsuperuser
+
+数据库迁移：
+python manage.py makemigrations 文件名  
+python manage.py migrate
+
+djangi shell命令（本地调试）：
+python manage.py shell
+
+
+初始化一个空仓库：
+git init
+查看日志（线上）：
+heroku logs --tail
+将未被忽略的文件添加至仓库：
+git add .
+提交所有修改过的文件并备注：
+git commit -am "备注"
+查看当前位于那个分支：
+git status
+登陆heroku：
+heroku login
+让heroku创建一个空项目：
+heroku create
+推送项目分支到heroku仓库：
+git push heroku master
+查看项目免费时长：
+heroku ps
+打开应用：
+heroku open
+在heroku建立数据库：
+heroku run python manage.py migrate
+打开bash终端：
+heroku run bash  建立超级用户：
+python manage.py createsuperuser
+更改heroku的URL：
+heroku apps:rename 新名字
+（setting_shost设置要注意！！！）
+
+
+访问地址：
+https://wangxaiofei.herokuapp.com
+2018pc练习地址：F:\Copa\PycharmProjects\lemonPython
+
+
+amqp==2.3.2
+asn1crypto==0.24.0
+billiard==3.5.0.4
+celery==4.2.1
+certifi==2018.11.29
+cffi==1.11.5
+chardet==3.0.4
+configparser==3.5.0
+cryptography==2.4.1
+Django==1.8.2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

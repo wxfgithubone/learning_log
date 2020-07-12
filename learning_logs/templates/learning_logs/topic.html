@@ -1,24 +1,18 @@
 {% extends 'learning_logs/base.html' %}
 {% load bootstrap3 %}
 
-{% block header %}
-  <h2>{{ topic }}</h2>
-{% endblock header %}
-
-
 {% block content %}
 
   <p>
       <a href="{% url 'learning_logs:new_entry' topic.id %}" class="btn btn-primary">写一篇日记</a>
-      <h4>当前主题：<a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></h4>
-
+      <h4><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>：主题的所属日记</h4>
   </p>
 
   {% for entry in entries %}
    <div class="panel panel-default">
        <div class="panel-heading">
            <h3>
-               {{ entry.date_added|date:'M d, Y H:i' }}
+               {{ entry.date_added|date:'添加时间 Y年 m月 d日-H时:i分:s秒' }}
                <small>
                    <a href="{% url 'learning_logs:edit_entry' entry.id %}" class="btn btn-primary">编辑日记</a>
                    <a href="{% url 'learning_logs:del_entry' entry.id %}" class="btn btn-primary">删除并回到主页</a>
