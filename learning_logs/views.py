@@ -1,11 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
-from .models import Topic, Entry
-from .froms import TopicForm, EntryForm
+from .models import Topic, Entry, Img
+from .froms import TopicForm, EntryForm, AddForm
 from django.contrib.auth.decorators import login_required
-from learning_logs import models
-from learning_log import mypage
+from django.contrib import messages
 # 在这里创建视图
 
 
@@ -17,8 +16,7 @@ def index(request):
 @login_required
 def topics(request):
     """显示所有的主题"""
-    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
-    # topics = Topic.objects.order_by('date_added')
+    topics = Topic.objects.filter(owner=request.user).order_by('-date_added')
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
@@ -94,6 +92,29 @@ def new_entry(request, topic_id):
 
 
 @login_required
+def add_img(request):
+    # 判断是否为 post 方法提交
+    if request.method == "POST":
+        af = AddForm(request.POST, request.FILES)
+        # 判断表单值是否和法
+        if af.is_valid():
+            name = af.cleaned_data['name']
+            headimg = af.cleaned_data['headimg']
+            user = Img(name=name, headimg=headimg)
+            messages.error(request, '添加图片成功')
+            user.save()
+            return render(request, 'learning_logs/look_img.html', context={"user": user})
+    else:
+        af = AddForm()
+        return render(request, 'learning_logs/add_img.html', context={"af": af})
+
+
+@login_required
+def look_img(request):
+    return render(request, 'learning_logs/look_img.html')
+
+
+@login_required
 def edit_entry(request, entry_id):
     """编辑既有条目"""
     entry = Entry.objects.get(id=entry_id)
@@ -121,5 +142,8 @@ def del_entry(request, entry_id):
     entry = Entry.objects.get(id=entry_id)
     entry.delete()
     return render(request, 'learning_logs/index.html')
+
+
+
 
 
