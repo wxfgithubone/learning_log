@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1=+hryq#$@u7k)917+*#xkhm8#b+4@%vi7b$r-9_&lbeh&(tz)'
 
 # 安全警告:不要在生产环境中打开调试!
-# DEBUG = True
-#
-# ALLOWED_HOSTS = ['localhost']
+DEBUG = True
+
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # 我的应用程序
     'learning_logs',
     'users',
+
 ]
 
 MIDDLEWARE = [
@@ -85,6 +86,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'test_5',
+    #     'USER': 'root',
+    #     'PASSWORD': '123456',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': 3306,
     }
 }
 
@@ -111,9 +119,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -147,9 +155,9 @@ if cwd == '/app' or cwd[:4] == '/tmp':
 SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}
 
 # 只允许heroku托管这个项目
-ALLOWED_HOSTS = ['wangxaiofei.herokuapp.com']
-
-DEBUG = False
+# ALLOWED_HOSTS = ['wangxaiofei.herokuapp.com']
+#
+# DEBUG = False
 
 # 静态资产配置
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -158,5 +166,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+
+# 指定上传文件目录
+# replace() 将 "\\" 替换为 "/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\\", "/")
+MEDIA_URL = '/media/'
 
 
