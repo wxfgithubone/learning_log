@@ -1,0 +1,33 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+
+<p>
+   <a href="{% url 'learning_logs:add_img' %}" class="btn btn-primary" id="6">添加图片</a>
+</p>
+{% for i in imgs %}
+    <ul>
+        <p>
+            <img src="/media/{{ i.headimg }}" width="50%" height="100%">
+            <li>图片名称：{{ i.name }}</li>
+            <li>图片ID：{{ i.id }}</li>
+            <li>添加时间：{{ i.date_added }}</li>
+        </p>
+    </ul>
+<!--    </div>-->
+        <p>
+            <ul>
+         <a href="{% url 'learning_logs:del_img' i.id %}" class="btn btn-primary">删除图片</a>
+    </ul>
+        </p>
+<!--    </div>&lt;!&ndash; panel &ndash;&gt;-->
+    {% empty %}
+       <h4>
+           <li>还没有上传图片</li>
+           <h2>
+               <a href="{% url 'learning_logs:add_img' %}" class="btn btn-primary"> 现在上传 </a>
+           </h2>
+       </h4>
+    {% endfor %}
+
+{% endblock content %}
