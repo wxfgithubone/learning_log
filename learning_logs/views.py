@@ -5,7 +5,7 @@ from .models import Topic, Entry, Img2, StudentMessage, StudentCourse
 from .froms import TopicForm, EntryForm, AddForm, StudentMessageFrom, StudentCourseForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-# 在这里创建视图
+# 在这里创建视图.
 
 
 @login_required

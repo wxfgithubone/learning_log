@@ -1,0 +1,24 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block content %}
+<h2>当前内容：<h2/>
+<h4>{{ course }}</h4>
+ <p>
+<!--     <a href="{% url 'learning_logs:add_img' %}" target="_blank">上传图片</a>-->
+     <a class="btn btn-primary">{{ student }}</a>
+     <a></a>
+ </p>
+ <form action="{% url 'learning_logs:update_course' i.id %}" method="post">
+     {% csrf_token %}
+     {{ form.as_p }}
+     <h4>
+         <button name="submit">保存</button>
+     </h4>
+ </form>
+
+
+{% endblock content %}
+
+
+
+method="post" enctype="multipart/form-data" action="{% url 'learning_logs:add_img' %}"

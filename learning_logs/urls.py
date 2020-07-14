@@ -26,7 +26,7 @@ urlpatterns = [
     # 用于删除条目
     url(r'^del_entry/(?P<entry_id>\d+)/$', views.del_entry, name='del_entry'),
 
-    # 添加图片
+    # 添加图片.
     url(r'^add_img/$', views.add_img, name='add_img'),
     # 查看图片
     url(r'^look_img/$', views.look_img, name='look_img'),
