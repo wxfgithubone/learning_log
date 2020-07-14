@@ -8,6 +8,7 @@ from django.contrib import messages
 # 在这里创建视图
 
 
+@login_required
 def index(request):
     """学习笔记的主页"""
     return render(request, 'learning_logs/index.html')
@@ -79,7 +80,6 @@ def edit_topic(request, topic_id):
 def new_entry(request, topic_id):
     """在特定的主题里添加新的条目"""
     topic = Topic.objects.get(id=topic_id)
-
     if request.method != 'POST':
         # 未提交数据：创建一个空表单
         form = EntryForm()
@@ -103,7 +103,6 @@ def edit_entry(request, entry_id):
     topic = entry.topic
     if topic.owner != request.user:
         raise Http404
-
     if request.method != 'POST':
         # 初次请求，使用当前条目充当表单
         form = EntryForm(instance=entry)
@@ -136,11 +135,11 @@ def add_img(request):
         if af.is_valid():
             name = af.cleaned_data['name']
             headimg = af.cleaned_data['headimg']
-            user = Img2(name=name, headimg=headimg)
-            user.owner = request.user
+            img = Img2(name=name, headimg=headimg)
+            img.owner = request.user
             messages.error(request, '添加图片成功')
-            user.save()
-            return render(request, 'learning_logs/look_img.html', context={"user": user})
+            img.save()
+            return render(request, 'learning_logs/look_img.html', context={"img": img})
     else:
         af = AddForm()
         return render(request, 'learning_logs/add_img.html', context={"af": af})
@@ -195,8 +194,23 @@ def add_student(request):
     return render(request, 'learning_logs/add_student.html', context)
 
 
+@login_required
+def update_student(requests, student_id):
+    """修改学生信息"""
+    student = StudentMessage.objects.get(id=student_id)
+    if requests.method != 'POST':
+        form = StudentMessageFrom(instance=student)
+    else:
+        form = StudentMessageFrom(instance=student, data=requests.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("learning_logs:students"))
+    context = {"student": student, "students": students, "form": form}
+    return render(requests, "learning_logs/update_student.html", context)
+
+
 def add_course(request, student_id):
-    """指定学生的课程"""
+    """指定学生的成绩"""
     student = StudentMessage.objects.get(id=student_id)
     if request.method != 'POST':
         form = StudentCourseForm()
@@ -209,4 +223,29 @@ def add_course(request, student_id):
             return HttpResponseRedirect(reverse('learning_logs:student', args=[student_id]))
     context = {'student': student, 'form': form}
     return render(request, 'learning_logs/add_course.html', context)
+
+
+def update_course(request, studentcourse_id):
+    """编辑学生成绩"""
+    course = StudentCourse.objects.get(id=studentcourse_id)
+    student = course.student
+    if student.owner != request.user:
+        raise Http404
+    if request.method != 'POST':
+        form = StudentCourseForm(instance=course)
+    else:
+        form = StudentCourseForm(instance=course, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("learning_logs:student"), args=[student.id])
+    context = {"course": course, "student": student, "form": form}
+    return render(request, "learning_logs/update_course.html", context)
+
+
+# @login_required
+# def del_course(request, studentcourse_id):
+#     """删除成绩"""
+#     course = StudentCourse.objects.get(id=studentcourse_id)
+#     course.delete()
+#     return render(request, 'learning_logs/index.html')
 

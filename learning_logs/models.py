@@ -31,17 +31,6 @@ class Entry(models.Model):
             return self.text[:50] + '....'
 
 
-# class Img(models.Model):
-#     name = models.CharField(max_length=50)
-#     # upload_to 指定上传文件位置
-#     # 这里指定存放在 img/ 目录下
-#     headimg = models.FileField(upload_to="img/")
-#
-#     # 返回名称
-#     def __str__(self):
-#         return self.name
-
-
 class Img2(models.Model):
     name = models.CharField(max_length=50)
     headimg = models.FileField(upload_to="img2/")
@@ -61,7 +50,7 @@ class StudentMessage(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     st_name = models.CharField(max_length=25, verbose_name="学生姓名")
     age = models.CharField(max_length=10, verbose_name="学生年龄")
-    sex = models.CharField(max_length=10, choices=gender, default='性别不详', verbose_name="学生性别")
+    sex = models.CharField(max_length=10, choices=gender, default=' ', verbose_name="学生性别")
     phone = models.CharField(max_length=11, unique=True,
                              error_messages={'unique': "手机号已存在，请更换"}, verbose_name="手机号")
     home = models.CharField(max_length=128, verbose_name="学生地址")
@@ -78,13 +67,10 @@ class StudentCourse(models.Model):
         ('体育', '体育'), ('音乐', '音乐'), ('美术', '美术'), ('古语', '古语'),
     )
     student = models.ForeignKey(StudentMessage, on_delete=models.CASCADE)
-    course = models.CharField(max_length=10, choices=cus, default='语文', verbose_name='课程')
+    course = models.CharField(max_length=10, choices=cus, default=' ', verbose_name='课程')
     score = models.IntegerField(max_length=10, verbose_name="分数")
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "科目—{0}：{1}分".format(self.course, self.score)
-
-
-
+        return "科目：{0}\n 分数：{1}".format(self.course, self.score)
 

@@ -1,10 +1,17 @@
 {% extends 'learning_logs/base.html' %}
 {% load bootstrap3 %}
-
-
 {% block content %}
-<a href="{% url 'learning_logs:add_course' student.id %}">添加成绩</a>
+<h3>
+    <p>
+        <li>ID：{{ student.id }}</li>
+    </p>
+</h3>
+<a href="{% url 'learning_logs:add_course' student.id %}" class="btn btn-primary">添加成绩</a>
+<p>
+
+</p>
   {% for i in st %}
+<!--    <a href="{% url 'learning_logs:update_course' i.id %}">修改成绩</a>-->
    <div class="panel panel-default">
        <div class="panel-heading">
            <ul>

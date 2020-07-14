@@ -1,6 +1,5 @@
 {% load bootstrap3 %}
-
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="en">
   <head>
       <meta charset="utf-8">
@@ -25,26 +24,23 @@
                    data-toggle="collapsed" data-target="#navbar"
                    aria-expanded="false" aria=controls="navbar"
                </button>
-<!--               <a class="navbar-brand" href="{% url 'learning_logs:index' %}">学习日志</a>-->
-               <a class="navbar-brand" href="{% url 'learning_logs:state' %}" id="user_log">学习日志</a>
+               <a class="navbar-brand" href="{% url 'learning_logs:state' %}" id="study_log">学习日志</a>
            </div>
 
            <div id="navbar" class="navbar-collapsed collapsed">
                <ul class="nav navbar-nav">
-                   <li><a href="{% url 'learning_logs:index' %}" id="index" >主页</a> </li>
-<!--                   <li><a href="{% url 'learning_logs:new_topic' %}">添加主题</a></li>-->
-<!--                   <li><a href="{% url 'learning_logs:add_img' %}" id="add_img">上传图片</a></li>-->
+                   <li><a href="{% url 'learning_logs:index' %}" id="index" class="index" >主页</a> </li>
                </ul>
                <ul class="nav navbar-nav navbar-right">
                    {% if user.is_authenticated %}
-                     <li><a href="{% url 'learning_logs:topics' %}" id="topics">我的日记</a></li>
-                     <li><a href="{% url 'learning_logs:look_img' %}" id="look_img" >我的图片</a></li>
-                     <li><a href="{% url 'learning_logs:students' %}">我的学生</a></li>
-                     <li><a id="xfcust_Name"> Hello - {{user.username}} !</a></li>
-                     <li><a href="{% url 'users:logout' %}" id="user_logout">点击注销</a></li>
+                     <li><a href="{% url 'learning_logs:topics' %}" id="my_topics" class="logs">我的日记</a></li>
+                     <li><a href="{% url 'learning_logs:look_img' %}" id="my_img" class="img">我的图片</a></li>
+                     <li><a href="{% url 'learning_logs:students' %}" id="my_student" class="student">我的学生</a></li>
+                     <li><a id="wxf_logs_Name"> Hello - {{user.username}} !</a></li>
+                     <li><a href="{% url 'users:logout' %}" id="user_logout" class="logout">点击注销</a></li>
                    {% else %}
-                     <li><a href="{% url 'users:register' %}" id="user_register">立即注册</a></li>
-                     <li><a href="{% url 'users:login' %}" id="user_login">点击登陆</a></li>
+                     <li><a href="{% url 'users:register' %}" id="user_register" class="register">立即注册</a></li>
+                     <li><a href="{% url 'users:login' %}" id="user_login" class="login">点击登陆</a></li>
                    {% endif %}
                </ul>
            </div><!--/.nav-collapse-->

@@ -5,13 +5,15 @@
 <p>
    <a href="{% url 'learning_logs:add_img' %}" class="btn btn-primary" id="6">添加图片</a>
 </p>
+<p> </p>
 {% for i in imgs %}
     <ul>
         <p>
-            <img src="/media/{{ i.headimg }}" width="50%" height="100%">
+            <img src="/media/{{ i.headimg }}" width="50%">
             <li>图片名称：{{ i.name }}</li>
             <li>图片ID：{{ i.id }}</li>
             <li>添加时间：{{ i.date_added }}</li>
+            <li>路径：{{ i.headimg }}</li>
         </p>
     </ul>
 <!--    </div>-->

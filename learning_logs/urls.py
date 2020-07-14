@@ -6,11 +6,11 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    # 主页
-    url(r'^$', views.index, name='index'),
-
     # 说明
-    url(r'^state/$', views.state, name='state'),
+    url(r'^$', views.state, name='state'),
+
+    # 主页
+    url(r'^index/$', views.index, name='index'),
     # 显示所有的主题
     url(r'^topics/$', views.topics, name='topics'),
     # 特定主题的详细页面
@@ -41,12 +41,12 @@ urlpatterns = [
     url(r'^add_student/$', views.add_student, name="add_student"),
     # 添加课程
     url(r'^add_course/(?P<student_id>\d+)/$', views.add_course, name="add_course"),
+    # 修改学生信息
+    url(r'^update_student/(?P<student_id>\d+)/$', views.update_student, name="update_student"),
+    # 修改学生成绩
+    url(r'^update_course/(?P<studentcourse_id>\d+)/$', views.update_course, name="update_course"),
+    # 用于删除成绩
+    # url(r'^del_course/(?P<studentcourse_id>\d+)/$', views.del_course, name='del_course'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
-
-
-
 
 
