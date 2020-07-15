@@ -83,16 +83,20 @@ WSGI_APPLICATION = 'learning_log.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'test_5',
-    #     'USER': 'root',
-    #     'PASSWORD': '123456',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': 3306,
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'learning_test',
+        'USER': 'root',
+        'PASSWORD': 'wxfmysql',
+        'HOST': '106.55.34.101',
+        'PORT': 3306,
+        'TEST': {
+            'CHARSET': 'utf8',
+            'COLLATION': 'utf8_general_ci'
+        }
     }
 }
 
