@@ -1,16 +1,14 @@
 {% extends 'learning_logs/base.html' %}
 
 {% block content %}
- <p>
 <!--     <a class="btn btn-primary">当前信息：</a>-->
 <!--     <a href="{% url 'learning_logs:student' student.id %}">{{ student }}</a>-->
-     <h3>修改</h3>
- </p>
+<h3>当前信息：</h3>
  <form action="{% url 'learning_logs:update_student' student.id %}" method="post" >
      {% csrf_token %}
      {{ form.as_p }}
      <h4>
-         <button name="submit">保存</button>
+         <button name="submit">修改</button>
      </h4>
  </form>
 

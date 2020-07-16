@@ -2,25 +2,23 @@
 {% load bootstrap3 %}
 
 {% block content %}
-<h3><a href="{% url 'learning_logs:add_student' %}" class="btn btn-primary">添加学生</a></h3>
+<h1><a href="{% url 'learning_logs:add_student' %}" class="btn btn-primary">添加学生</a></h1>
      {% for student in students %}
      <div class="panel panel-default">
          <div class="panel-heading">
-             <h4>
-                 <a href="{% url 'learning_logs:update_student' student.id %}" >修改学生信息</a>
-                 <p> </p>
-                  <a href="{% url 'learning_logs:student' student.id %}" >查看成绩</a>
-                 <p> </p>
-                     <ul>
-                         <li>学号：{{ student.id }}</li>
-                         <li>姓名：{{ student.st_name }}</li>
-                         <li>年龄：{{ student.age }}</li>
-                         <li>性别：{{ student.sex }}</li>
-                         <li>号码：{{ student.phone }}</li>
-                         <li>住址：{{ student.home }}</li>
-                     </ul>
-                 </h4>
-         </div>
+                 <a href="{% url 'learning_logs:update_student' student.id %}" class="btn btn-primary">修改学生信息</a>
+                  <a href="{% url 'learning_logs:student' student.id %}" class="btn btn-primary">查看成绩</a>
+             </div>
+             <div class="panel-body">
+                <ul>
+                    <li>学号：{{ student.id }}</li>
+                    <li>姓名：{{ student.st_name }}</li>
+                    <li>年龄：{{ student.age }}</li>
+                    <li>性别：{{ student.sex }}</li>
+                    <li>号码：{{ student.phone }}</li>
+                    <li>住址：{{ student.home }}</li>
+                </ul>
+             </div>
 
      </div><!-- panel -->
      {% empty %}

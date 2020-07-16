@@ -14,23 +14,53 @@
 <!--    <a href="{% url 'learning_logs:update_course' i.id %}">修改成绩</a>-->
    <div class="panel panel-default">
        <div class="panel-heading">
-           <ul>
-<!--               <li>学生ID：{{ i.student_id }}</li>-->
+           <h4>
+            <ul>
                <li>科目：{{ i.course}}</li>
                <li>分数：{{ i.score }}</li>
-           </ul>
-           <dir>
-               {% if user.is_authenticated %}
-                <h4>评分老师：{{ user.username }}</h4>
-               {% endif %}
-           </dir>
+            </ul>
+           </h4>
        </div>
        <div class="panel-body">
+           {% if user.is_authenticated %}
+                <h5>评分老师：{{ user.username }}</h5>
+           {% endif %}
        </div>
    </div><!-- panel -->
+<!--<div class="ant-spin-nested-loading">-->
+<!--    <div class="ant-spin-conainer">-->
+<!--        <div class="ant-table ant-table-bordered ant-table-scroll-position-left">-->
+<!--            <div class="ant-table-content">-->
+<!--                <div class="ant-table-body">-->
+<!--                    <table class>-->
+<!--                        <thead class="ant-table-thead">-->
+<!--                        <tr>-->
+<!--                            <th class="ant-table-align-center" style="text-align: center;">-->
+<!--                                <span class="ant-table-header-column">-->
+<!--                                    <div>-->
+<!--                                        <span class="ant-table-column-title">科目</span>-->
+<!--                                        <span class="ant-table-column-sorter"></span>-->
+<!--                                    </div>-->
+<!--                                </span>-->
+<!--                            </th>-->
+<!--                            <th class="ant-table-align-center" style="text-align: center;">-->
+<!--                                <span class="ant-table-header-column">-->
+<!--                                    <div>-->
+<!--                                        <span class="ant-table-column-title">分数</span>-->
+<!--                                        <span class="ant-table-column-sorter"></span>-->
+<!--                                    </div>-->
+<!--                                </span>-->
+<!--                            </th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
    {% empty %}
-    <h2><li>该学生暂无成绩</li></h2>
-    <a href="{% url 'learning_logs:add_course' student.id %}">添加成绩</a>
+    <h2>该学生暂无成绩</h2>
    {% endfor %}
 
 {% endblock content %}
