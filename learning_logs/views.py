@@ -8,15 +8,14 @@ from django.contrib import messages
 # 在这里创建视图.
 
 
-@login_required
-def index(request):
-    """学习笔记的主页"""
-    return render(request, 'learning_logs/index.html')
-
-
 def state(request):
     """学习笔记说明"""
     return render(request, "learning_logs/state.html")
+
+
+def index(request):
+    """学习笔记的主页"""
+    return render(request, 'learning_logs/index.html')
 
 
 @login_required
@@ -161,6 +160,7 @@ def del_img(request, id):
     return render(request, 'learning_logs/index.html')
 
 
+@login_required
 def students(request):
     """显示所有学生"""
     students = StudentMessage.objects.filter(owner=request.user).order_by('-date_added')
@@ -168,6 +168,7 @@ def students(request):
     return render(request, 'learning_logs/students.html', context)
 
 
+@login_required
 def student(request, student_id):
     """单个学生的成绩页"""
     student = get_object_or_404(StudentMessage, id=student_id)
@@ -178,6 +179,7 @@ def student(request, student_id):
     return render(request, 'learning_logs/student.html', context)
 
 
+@login_required
 def add_student(request):
     """添加学生"""
     if request.method != 'POST':
@@ -209,6 +211,7 @@ def update_student(requests, student_id):
     return render(requests, "learning_logs/update_student.html", context)
 
 
+@login_required
 def add_course(request, student_id):
     """指定学生的成绩"""
     student = StudentMessage.objects.get(id=student_id)
@@ -225,6 +228,7 @@ def add_course(request, student_id):
     return render(request, 'learning_logs/add_course.html', context)
 
 
+@login_required
 def update_course(request, studentcourse_id):
     """编辑学生成绩"""
     course = StudentCourse.objects.get(id=studentcourse_id)

@@ -23,13 +23,10 @@
     </ul>
         </p>
 <!--    </div>&lt;!&ndash; panel &ndash;&gt;-->
-    {% empty %}
-       <h4>
-           <li>还没有上传图片</li>
-           <h2>
-               <a href="{% url 'learning_logs:add_img' %}" class="btn btn-primary"> 现在上传 </a>
-           </h2>
-       </h4>
-    {% endfor %}
+{% empty %}
+<h4>
+    <li>还没有上传图片</li>
+</h4>
+{% endfor %}
 
 {% endblock content %}

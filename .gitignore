@@ -1,3 +1,4 @@
-ll_env
+ll_env/
 __pycache__/
 *.sqlite3
+learning_log/media/
