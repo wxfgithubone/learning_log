@@ -47,6 +47,9 @@ urlpatterns = [
     url(r'^update_course/(?P<studentcourse_id>\d+)/$', views.update_course, name="update_course"),
     # 用于删除成绩
     # url(r'^del_course/(?P<studentcourse_id>\d+)/$', views.del_course, name='del_course'),
+
+    # 测试json格式
+    url(r'^test_json/$', views.test_json, name='test_json'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

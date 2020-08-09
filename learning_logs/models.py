@@ -74,3 +74,8 @@ class StudentCourse(models.Model):
     def __str__(self):
         return "科目：{0}\n 分数：{1}".format(self.course, self.score)
 
+
+
+
+
+

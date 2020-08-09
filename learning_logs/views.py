@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
@@ -5,7 +6,20 @@ from .models import Topic, Entry, Img2, StudentMessage, StudentCourse
 from .froms import TopicForm, EntryForm, AddForm, StudentMessageFrom, StudentCourseForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import json
 # 在这里创建视图.
+
+
+def test_json(request):
+    data = {
+        "name": "王哈哈",
+        "age": 20,
+        "phone": 13052277120,
+        "home": None,
+        "book": ['数学', '语文', '历史'],
+        "son": [{"name": "大儿子", "age": 3}, {"name": "二儿子", "age": 2}]
+    }
+    return HttpResponse(json.dumps(data))
 
 
 def state(request):
@@ -18,6 +32,7 @@ def index(request):
     return render(request, 'learning_logs/index.html')
 
 
+@csrf_exempt
 @login_required
 def topics(request):
     """显示所有的主题"""
@@ -26,6 +41,7 @@ def topics(request):
     return render(request, 'learning_logs/topics.html', context)
 
 
+@csrf_exempt
 @login_required
 def topic(request, topic_id):
     """显示单个主题及其所有的条目"""
@@ -38,6 +54,7 @@ def topic(request, topic_id):
     return render(request, 'learning_logs/topic.html', context)
 
 
+@csrf_exempt
 @login_required
 def new_topic(request):
     """添加新主题"""
@@ -57,6 +74,7 @@ def new_topic(request):
     return render(request, 'learning_logs/new_topic.html', context)
 
 
+@csrf_exempt
 @login_required
 def edit_topic(request, topic_id):
     """修改主题名称"""
@@ -75,6 +93,7 @@ def edit_topic(request, topic_id):
     return render(request, 'learning_logs/edit_topic.html', context)
 
 
+@csrf_exempt
 @login_required
 def new_entry(request, topic_id):
     """在特定的主题里添加新的条目"""
@@ -95,6 +114,7 @@ def new_entry(request, topic_id):
     return render(request, 'learning_logs/new_entry.html', context)
 
 
+@csrf_exempt
 @login_required
 def edit_entry(request, entry_id):
     """编辑既有条目"""
@@ -116,6 +136,7 @@ def edit_entry(request, entry_id):
     return render(request, 'learning_logs/edit_entry.html', context)
 
 
+@csrf_exempt
 @login_required
 def del_entry(request, entry_id):
     """删除条目"""
@@ -124,6 +145,7 @@ def del_entry(request, entry_id):
     return render(request, 'learning_logs/index.html')
 
 
+@csrf_exempt
 @login_required
 def add_img(request):
     """添加图片"""
@@ -136,7 +158,7 @@ def add_img(request):
             headimg = af.cleaned_data['headimg']
             img = Img2(name=name, headimg=headimg)
             img.owner = request.user
-            messages.error(request, '添加图片成功')
+            messages.error(request, '添加图片成功:)')
             img.save()
             return render(request, 'learning_logs/look_img.html', context={"img": img})
     else:
@@ -144,6 +166,7 @@ def add_img(request):
         return render(request, 'learning_logs/add_img.html', context={"af": af})
 
 
+@csrf_exempt
 @login_required
 def look_img(request):
     """查看当前用户的图片"""
@@ -152,6 +175,7 @@ def look_img(request):
     return render(request, 'learning_logs/imgs.html', context)
 
 
+@csrf_exempt
 @login_required
 def del_img(request, id):
     """删除图片"""
@@ -160,6 +184,7 @@ def del_img(request, id):
     return render(request, 'learning_logs/index.html')
 
 
+@csrf_exempt
 @login_required
 def students(request):
     """显示所有学生"""
@@ -168,6 +193,7 @@ def students(request):
     return render(request, 'learning_logs/students.html', context)
 
 
+@csrf_exempt
 @login_required
 def student(request, student_id):
     """单个学生的成绩页"""
@@ -179,6 +205,7 @@ def student(request, student_id):
     return render(request, 'learning_logs/student.html', context)
 
 
+@csrf_exempt
 @login_required
 def add_student(request):
     """添加学生"""
@@ -196,6 +223,7 @@ def add_student(request):
     return render(request, 'learning_logs/add_student.html', context)
 
 
+@csrf_exempt
 @login_required
 def update_student(requests, student_id):
     """修改学生信息"""
@@ -211,6 +239,7 @@ def update_student(requests, student_id):
     return render(requests, "learning_logs/update_student.html", context)
 
 
+@csrf_exempt
 @login_required
 def add_course(request, student_id):
     """指定学生的成绩"""
@@ -228,6 +257,7 @@ def add_course(request, student_id):
     return render(request, 'learning_logs/add_course.html', context)
 
 
+@csrf_exempt
 @login_required
 def update_course(request, studentcourse_id):
     """编辑学生成绩"""
