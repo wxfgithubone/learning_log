@@ -75,6 +75,36 @@ class StudentCourse(models.Model):
         return "科目：{0}\n 分数：{1}".format(self.course, self.score)
 
 
+class Course(models.Model):
+    course_name = models.CharField(max_length=50, verbose_name='课程')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.course_name
+
+
+class Student(models.Model):
+    gender = (
+        ('男', '男'), ('女', '女'), ('性别不详', '性别不详')
+    )
+    name = models.CharField(max_length=30, verbose_name='姓名')
+    age = models.IntegerField(max_length=28, verbose_name='年龄')
+    sex = models.CharField(max_length=10, choices=gender, verbose_name='性别')
+    phone = models.IntegerField(max_length=11, unique=True, error_messages={"unique": "手机号已存在"}, verbose_name='电话')
+    home = models.CharField(max_length=128, verbose_name='住址')
+
+    def __str__(self):
+        return self.name
+
+
+class Score(models.Model):
+    score = models.IntegerField(max_length=14, verbose_name='分数')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.score)
+
 
 
 
